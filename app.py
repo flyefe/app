@@ -1,22 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-import pymysql
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+# import pymysql
+# from db import connect_to_database
+from db import mysql
 
 app = Flask (__name__)
 app.secret_key = '1234'
 
 
-#MYSQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'maestro'
-app.config['MYSQL_DB'] = 'user_sys'
+# #MYSQL Configuration
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'maestro'
+# app.config['MYSQL_DB'] = 'user_sys'
 
-mysql = pymysql.connect(
-    host=app.config['MYSQL_HOST'],
-    user=app.config['MYSQL_USER'],
-    password=app.config['MYSQL_PASSWORD'],
-    db=app.config['MYSQL_DB']
-)
+# mysql = connect_to_database()
+cur = mysql.cursor()
+
 
 
 @app.route('/check')
@@ -38,7 +37,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        cur = mysql.cursor()
+        # cur = mysql.cursor()
         cur.execute("SELECT username, password FROM user WHERE username = %s",(username,))
         user = cur.fetchone()
         cur.close()
@@ -66,15 +65,26 @@ def signup():
         name = request.form['name']
 
         
-        cursor = mysql.cursor()
-        cursor.execute("INSERT INTO user (username, email, password, name) VALUES (%s, %s, %s, %s)", (username, email, password, name))
+        # cursor = mysql.cursor()
+        cur.execute("INSERT INTO user (username, email, password, name) VALUES (%s, %s, %s, %s)", (username, email, password, name))
         mysql.commit()
-        cursor.close()
+        cur.close()
 
-        # flash('Account created successfully', 'success')
+        flash('Account created successfully', 'success')
         return redirect(url_for('login'))  # You can redirect to your login page after successful signup
 
     return render_template('signup.html')
+
+
+# @app.route('/users')
+# def get_users():
+#     cursor = mysql.cursor()
+#     cursor.execute('SELECT * FROM users')
+#     users = cursor.fetchall()
+#     cursor.close()
+
+#     return render_template('users.html', users=users)
+
 
 
 if __name__ == '__main__':

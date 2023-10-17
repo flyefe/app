@@ -8,6 +8,16 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash-messages">
+        {% for message in messages %}
+        <li class="flash-{{ message[1] }}">{{ message[0] }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     <h1>Welcome to the User System</h1>
 
     {% if username %}
