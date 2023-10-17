@@ -1,0 +1,35 @@
+ /* CSS for alert messages */
+ .alert {
+     padding: 15px;
+     background-color: #f44336;
+     color: white;
+ }
+
+ /* Additional styles for different categories if needed */
+ .alert-success {
+     background-color: #4CAF50;
+ }
+
+ /* CSS for buttons */
+ .btn {
+     display: inline-block;
+     padding: 10px 20px;
+     background-color: #11e10d;
+     color: white;
+     text-decoration: none;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+ /* Additional styles for different button classes if needed */
+ .btn-secondary {
+     background-color: #3357ea;
+ }
+
+ /* Container styles */
+ .container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+ }

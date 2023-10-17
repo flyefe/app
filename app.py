@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import pymysql
 
-app = Flask (__name__)
+app = Flask (__name__, static_folder='static')
 app.secret_key = '1234'
 
 
@@ -29,7 +29,7 @@ def check_db():
 @app.route('/')
 def home():
     if 'username' in session:
-        flash('you are logging in', 'success')
+        flash('you are logged in', 'success')
         return render_template('home.html', username=session['username'])
     else:
         return render_template('home.html')
@@ -72,7 +72,7 @@ def signup():
         mysql.commit()
         cursor.close()
 
-        # flash('Account created successfully', 'success')
+        flash('Account created successfully', 'success')
         return redirect(url_for('login'))  # You can redirect to your login page after successful signup
 
     return render_template('signup.html')
