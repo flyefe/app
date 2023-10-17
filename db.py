@@ -1,6 +1,5 @@
 from flask import Flask, current_app
 import pymysql
-# from contextlib import contextmanager
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -9,7 +8,6 @@ app.config['MYSQL_PASSWORD'] = 'maestro'
 app.config['MYSQL_DB'] = 'user_sys'
 
 
-# @contextmanager
 def connect_to_database():
     """Connects to the database and returns a database connection object."""
 
