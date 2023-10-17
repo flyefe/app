@@ -1,51 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "basic.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-   <!-- <style>
-        /* CSS for alert messages */
-        .alert {
-            padding: 15px;
-            background-color: #f44336;
-            color: white;
-        }
+{% block title %}Home{% endblock %}
 
-        /* Additional styles for different categories if needed */
-        .alert-success {
-            background-color: #4CAF50;
-        }
-
-        /* CSS for buttons */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #11e10d;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Additional styles for different button classes if needed */
-        .btn-secondary {
-            background-color: #3357ea;
-        }
-
-        /* Container styles */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-    </style> -->
-    <title>Home</title>
-</head>
-
-<body>
+{% block content %}
     <div class="container">
         {% for message in get_flashed_messages() %}
         <div class="alert alert-{{ message.category }}" role="alert">
@@ -81,6 +38,4 @@
             }, 500); // Adjust the time to match your CSS transition duration
         }
     </script>
-</body>
-
-</html>
+{% endblock %}

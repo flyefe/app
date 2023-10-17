@@ -1,34 +1,22 @@
-<!DOCTYPE html>
-<html>
+{% extends "basic.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Sign up</title>
-</head>
+{% block title %}Sign Up{% endblock %}
 
-<body>
-    <div class="container">
-        {% for message in get_flashed_messages() %}
-        <div class="alert alert-{{ message.category }}" role="alert">
-            <span class="close-btn" onclick="closeAlert(this)">&times;</span>
-            {{ message }}
-        </div>
-        {% endfor %}
-        <h2>Sign Up</h2>
-        <form method="POST" action="{{ url_for('signup') }}">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required><br>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required><br>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required><br>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required><br>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
-    </div>
-</body>
+{% block content %}
+<h1>Sign Up</h1>
+<form method="POST" action="{{ url_for('signup') }}">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required><br><br>
 
-</html>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required><br><br>
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required><br><br>
+
+    <input type="submit" class="btn btn-primary" value="Sign Up">
+</form>
+{% endblock %}
