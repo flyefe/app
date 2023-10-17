@@ -1,5 +1,6 @@
 from flask import Flask, current_app
 import pymysql
+# from contextlib import contextmanager
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -7,6 +8,8 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'maestro'
 app.config['MYSQL_DB'] = 'user_sys'
 
+
+# @contextmanager
 def connect_to_database():
     """Connects to the database and returns a database connection object."""
 
@@ -16,6 +19,11 @@ def connect_to_database():
     db = current_app.config['MYSQL_DB']
 
     conn = pymysql.connect(host=host, user=user, password=password, db=db)
+
+    try:
+        yield conn
+    finally:
+        conn.close()
 
     return conn
 
