@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-{{ message.category }}">
+        {{ message.message }}
+    </div>
+    {% endfor %}
+
     <h1>Welcome to the User System</h1>
 
     {% if username %}

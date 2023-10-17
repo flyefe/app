@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import pymysql
 
 app = Flask (__name__)
@@ -29,6 +29,7 @@ def check_db():
 @app.route('/')
 def home():
     if 'username' in session:
+        flash('you are logging in', 'success')
         return render_template('home.html', username=session['username'])
     else:
         return render_template('home.html')
