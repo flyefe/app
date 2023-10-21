@@ -6,21 +6,21 @@
 
 {% block content %}
 <h1 align="center">Kindly Login Let's Go</h1>
-<form methods="POST">
+<form method="POST">
     <h3 align="center">Login</h3>
     <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
     </div>
    
     <div class="form-group">
-        <label for="password">Password1</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
     </div>
 
   
     <br>
-    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    <button type="submit" class="btn btn-primary btn-sm">Login</button>
 </form>
 
 {% endblock %}
