@@ -66,6 +66,9 @@ def sign_up():
             flash("Passwords don't match", category='error')
         elif len(password1) < 7:
             flash("Password must be at least 7 characters", category='error')
+        elif User.query.filter_by(email=email).first():
+            flash("Email already exists", category='error')
+        
         else:
             new_user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
