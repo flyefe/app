@@ -7,12 +7,20 @@
 {% block content %}
 <h1 align="center">Notes</h1>
 <ul class="list-group list-group list-group-flush " id="note">
-    {% for note in user.notes %}
+    <!-- {% for note in user.notes %}
     <li class-list-item>
         {{note.data}}
         <button type="button" class="close" onclick="deleteNote({{note.id}})">
             <span aria-hidden="true">&times;</span>
         </button>
+    </li>
+    {% endfor %} -->
+    {% for note in user.notes %}
+    <li class-list-item>
+        {{ note.data }}
+        <a href="{{ url_for('views.delete_note', note_id=note.id) }}" class="close">
+            <span aria-hidden="true">&times;</span>
+        </a>
     </li>
     {% endfor %}
 </ul>
