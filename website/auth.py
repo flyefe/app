@@ -12,11 +12,13 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        # first_name = request.form.get('firstName')
 
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                session['first_name'] = user.first_name
+                flash('Welcome back ' + user.first_name + '!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
@@ -58,7 +60,8 @@ def sign_up():
             new_user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
-            flash("Account created!", category='success')
+            session['first_name'] = new_user.first_name
+            flash("Account created! Welcome to the website {{" + new_user.first_name + "}}", category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home', user=current_user))
 
